@@ -1,0 +1,22 @@
+name: Run API Tests
+
+on: [push, pull_request]  # 代码推送或提 PR 时触发
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.10"
+
+      - name: Install dependencies
+        run: |
+          pip install pytest requests
+
+      - name: Run tests
+        run: pytest test_gray_api.py -v
